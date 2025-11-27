@@ -1,0 +1,25 @@
+xams Piscine à 42Nice
+Avant l'exam
+Les exams piscine ont lieu tout les vendredi, le cluster dans lequel l'exam aura lieu est indiqué dans l'événement de l'intranet:
+
+Premier exam vendredi après-midi (habituellement de 14h00 à 18h00)
+Second exam vendredi après-midi (habituellement de 14h00 à 18h00)
+Troisième exam vendredi après-midi (habituellement de 14h00 à 18h00)
+Quatrième exam (le final) vendredi durant toute la journée (habituellement de 10h à 18h)
+Cependant ces dates peuvent être amenées à être modifiées selon les contraintes de la vie de l'école et du staff (events, etc...).
+
+Les événements disponibles sur votre intra font foi !
+
+Vous devez toujours vous inscrire à l'évènement de l'agenda ET au projet.
+(S'inscrire à l'événement sur l'agenda vous inscrira automatiquement au projet si vous ne l'êtes pas, mais attention s'inscrire au projet ne vous inscrit PAS automatiquement à l'événement)
+
+Pas d'inscription signifie pas d'exam et donc un 0.
+
+Pendant l'exam
+Lancez votre session d'examen avec l'utilitaire examshell.
+
+Si votre exercice est faux, vous devez retentez le même exercice et cela jusqu'à sa validation.
+Le temps entre chaque commande grademe devient incrémental (suivant la suite de fibonnacci 1,2,3,5,8,13 etc.). Attention à bien tester avant de faire un grademe.
+Plus d'infos sur les règles spécifiques à l'exam dans règles exams machine
+
+Dernière Mise à jour : 15/03/2024
