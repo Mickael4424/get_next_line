@@ -19,9 +19,7 @@
 # include <unistd.h>
 # include <string.h>
 
-    #ifndef BUFFER_SIZE
-    # define BUFFER_SIZE 42
-    #endif
+#define BUFFER_SIZE 42
 
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strjoin(char const *s1, char const *s2);
