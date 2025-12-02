@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbouyer <mbouyer@student.42nice.fr>        +#+  +:+       +#+        */
+/*   By: mickael <mickael@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 11:38:27 by mbouyer           #+#    #+#             */
-/*   Updated: 2025/11/27 12:28:51 by mbouyer          ###   ########.fr       */
+/*   Updated: 2025/12/02 11:35:16 by mickael          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,28 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strrchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
-	int		i;
-	char	cc;
+	unsigned int	i;
+	char			cc;
 
 	i = 0;
 	cc = (char) c;
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	while (i >= 0)
+	if (s == NULL)
+		return (NULL);
+	while (s[i])
 	{
 		if (s[i] == cc)
 		{
 			return ((char *)s + i);
 		}
-		i--;
+		i++;
 	}
-	if (cc == '\0')
+	if (s[i] == cc)
 	{
-		return ("\0");
+		return ((char *) &s[i]);
 	}
-	return (0);
+	return (NULL);
 }
 
 char	*ft_strdup(const char *s)
