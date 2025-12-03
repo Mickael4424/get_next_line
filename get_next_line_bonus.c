@@ -6,7 +6,7 @@
 /*   By: mbouyer <mbouyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 11:38:14 by mbouyer           #+#    #+#             */
-/*   Updated: 2025/12/03 11:01:59 by mbouyer          ###   ########.fr       */
+/*   Updated: 2025/12/03 15:14:56 by mbouyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,18 @@ char	*extract_stash(char *stash)
 	return (line);
 }
 
+char	*join_stash(char *new_stash, char *temp_buffer, char *stash)
+{
+	new_stash = ft_strjoin(stash, temp_buffer);
+	if (!new_stash)
+	{
+		free(temp_buffer);
+		return (NULL);
+	}
+	free(stash);
+	return (new_stash);
+}
+
 char	*read_stash(int fd, char *stash)
 {
 	char	*temp_buffer;
@@ -86,14 +98,8 @@ char	*read_stash(int fd, char *stash)
 		if (bytes_read < 0)
 			break ;
 		temp_buffer[bytes_read] = '\0';
-		new_stash = ft_strjoin(stash, temp_buffer);
-		if (!new_stash)
-		{
-			free(temp_buffer);
-			return (NULL);
-		}
-		free(stash);
-		stash = new_stash;
+		new_stash = NULL;
+		stash = join_stash(new_stash, temp_buffer, stash);
 	}
 	free(temp_buffer);
 	if (bytes_read < 0 || (bytes_read == 0 && (!stash || stash[0] == '\0')))

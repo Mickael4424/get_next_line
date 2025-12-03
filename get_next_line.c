@@ -6,7 +6,7 @@
 /*   By: mbouyer <mbouyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 12:30:53 by mbouyer           #+#    #+#             */
-/*   Updated: 2025/12/03 15:02:20 by mbouyer          ###   ########.fr       */
+/*   Updated: 2025/12/03 15:57:16 by mbouyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,18 @@ char	*extract_stash(char *stash)
 	return (line);
 }
 
+char	*join_stash(char *new_stash, char *temp_buffer, char *stash)
+{
+	new_stash = ft_strjoin(stash, temp_buffer);
+	if (!new_stash)
+	{
+		free(temp_buffer);
+		return (NULL);
+	}
+	free(stash);
+	return (new_stash);
+}
+
 char	*read_stash(int fd, char *stash)
 {
 	char	*temp_buffer;
@@ -86,14 +98,8 @@ char	*read_stash(int fd, char *stash)
 		if (bytes_read < 0)
 			break ;
 		temp_buffer[bytes_read] = '\0';
-		new_stash = ft_strjoin(stash, temp_buffer);
-		if (!new_stash)
-		{
-			free(temp_buffer);
-			return (NULL);
-		}
-		free(stash);
-		stash = new_stash;
+		new_stash = NULL;
+		stash = join_stash(new_stash, temp_buffer, stash);
 	}
 	free(temp_buffer);
 	if (bytes_read < 0 || (bytes_read == 0 && (!stash || stash[0] == '\0')))
@@ -107,23 +113,23 @@ char	*read_stash(int fd, char *stash)
 
 char	*get_next_line(int fd)
 {
-	static char	*stash[FD_SIZE];
+	static char	*stash;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= FD_SIZE)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!stash[fd])
-		stash[fd] = ft_strdup("");
-	stash[fd] = read_stash(fd, stash[fd]);
-	if (!stash[fd])
+	if (!stash)
+		stash = ft_strdup("");
+	stash = read_stash(fd, stash);
+	if (!stash)
 		return (NULL);
-	line = extract_stash(stash[fd]);
+	line = extract_stash(stash);
 	if (!line)
 	{
-		free(stash[fd]);
-		stash[fd] = NULL;
+		free(stash);
+		stash = NULL;
 		return (NULL);
 	}
-	stash[fd] = clean_stash(stash[fd]);
+	stash = clean_stash(stash);
 	return (line);
 }
