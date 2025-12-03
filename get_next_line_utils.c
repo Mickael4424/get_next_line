@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mickael <mickael@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mbouyer <mbouyer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 11:38:27 by mbouyer           #+#    #+#             */
-/*   Updated: 2025/12/02 11:35:16 by mickael          ###   ########.fr       */
+/*   Updated: 2025/12/03 10:04:38 by mbouyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,57 +94,4 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		s3[i++] = s2[j++];
 	s3[i] = '\0';
 	return (s3);
-}
-
-void	ft_bzero(void	*str, size_t	n)
-{
-	char	*str_cpy;
-
-	str_cpy = (char *) str;
-	while (n > 0)
-	{
-		*str_cpy = 0;
-		str_cpy ++;
-		n--;
-	}
-}
-
-void	*ft_calloc(size_t	nmemb, size_t	size)
-{
-	void	*ptr;
-	size_t	total_size;
-
-	total_size = nmemb * size;
-	if (nmemb != 0 && ((total_size / nmemb) != size))
-		return (NULL);
-	ptr = malloc (total_size);
-	if (!ptr)
-		return (NULL);
-	ft_bzero(ptr, total_size);
-	return (ptr);
-}
-
-char	*ft_substr(const char *s, unsigned int start, size_t len)
-{
-	size_t	i;
-	char	*substr;
-
-	if (!s)
-		return (NULL);
-	if (start > ft_strlen(s))
-	{
-		return (ft_strdup(""));
-	}
-	if (len > ft_strlen(s + start))
-		len = ft_strlen(s + start);
-	substr = ft_calloc(len + 1, sizeof(char));
-	if (!substr)
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		substr[i] = s[start + i];
-		i++;
-	}
-	return (substr);
 }
